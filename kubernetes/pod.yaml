@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simpleapp-pod
+  labels:
+    app: myapp
+    env: dev
+spec:
+  containers:
+    - name: web
+      image: brokenleg/simpleapp:2.0
+      ports:
+        - containerPort: 8000
+      env:
+      - name: REDIS_HOST
+        value: localhost
+    - name: redis
+      image: redis:alpine
+      ports:
+        - containerPort: 6379
+

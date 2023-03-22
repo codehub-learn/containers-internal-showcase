@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: simpleapp-rs
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: simpleapp
+  template:
+    metadata:
+      labels:
+        app: simpleapp
+    spec:
+      containers:
+      - image: brokenleg/simpleapp:2.0
+        name: simpleapp
+        resources: {}
+        env:
+          - name: REDIS_HOST
+            value: localhost
+      - image: redis:alpine
+        name: redis
+        resources: {}

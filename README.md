@@ -1,1 +1,1 @@
-# containers-internal-showcase
+# Sample source code for the Kubernetes Fundamentals training
