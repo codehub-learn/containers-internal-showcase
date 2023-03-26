@@ -4,6 +4,7 @@ metadata:
   labels:
     app: simpleapp
   name: simpleapp
+  namespace: app
 spec:
   ports:
   - name: webport

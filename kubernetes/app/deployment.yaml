@@ -4,16 +4,17 @@ metadata:
   labels:
     app: simpleapp
   name: simpleapp-deploy
+  namespace: app
 spec:
-  replicas: 2
+  replicas: 100
   selector:
     matchLabels:
       app: simpleapp
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 20%
-      maxUnavailable: 4
+      maxSurge: 2
+      maxUnavailable: 1
   template:
     metadata:
       labels:
@@ -25,7 +26,4 @@ spec:
         resources: {}
         env:
           - name: REDIS_HOST
-            value: localhost
-      - image: redis:alpine
-        name: redis
-        resources: {}
+            value: cache.cache.svc.cluster.local
