@@ -1,0 +1,12 @@
+FROM debian:bullseye-slim AS build
+RUN apt-get update && apt-get install -y \
+    gcc \
+    make 
+WORKDIR /var/build
+COPY src /var/build/
+RUN make myapp
+
+
+FROM scratch AS run
+COPY --from=build /var/build/myapp /myapp
+CMD ["/myapp"]

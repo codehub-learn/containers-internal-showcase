@@ -1,0 +1,9 @@
+FROM debian:bullseye-slim
+
+ARG MYMY
+
+ENV MYMY='123'
+
+
+
+CMD ["/bin/bash", "-c", "sleep", "3600"]
