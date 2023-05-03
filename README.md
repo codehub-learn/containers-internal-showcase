@@ -1,1 +1,1 @@
-# Sample source code for the Kubernetes Fundamentals training
+# Sample source code for the Docker/Kubernetes training
