@@ -1,0 +1,17 @@
+docker swarm init --advertise-addr 
+docker service create --name registry --publish published=5000,target=5000 registry:2
+
+docker service ls
+
+correct -> compose file with registry 
+
+docker-compose up -d
+
+docker-compose push
+
+docker-compose down
+
+docker stack deploy --compose-file
+
+docker service scale
+

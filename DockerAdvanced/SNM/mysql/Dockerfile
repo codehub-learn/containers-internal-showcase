@@ -5,4 +5,6 @@ ENV MYSQL_RANDOM_ROOT_PASSWORD true
 ENV MYSQL_DATABASE snm
 ENV MYSQL_USER snm
 ENV MYSQL_PASSWORD snm1234
+COPY my.cnf /etc/my.cnf
+COPY init.sql /docker-entrypoint-initdb.d/01.sql
 EXPOSE 3306

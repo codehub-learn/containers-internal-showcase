@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+  annotations: 
+  labels:
+    name: app
+spec:
+  revisionHistoryLimit: 0
+  replicas: 1
+  selector:
+    matchLabels:
+      name: app
+  template:
+    metadata:
+      annotations:
+      labels:
+        name: app
+    spec:
+      containers:
+        - name: app
+          image: docker.io/brokenleg/app:2.3
+          ports:
+            - containerPort: 5000
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: APP_HOSTNAME
+              value: "0.0.0.0"
+            - name: APP_PORT
+              value: "5000"
+            - name: DB_HOST
+              value: db.snm
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app
+  labels:
+    name: app
+spec:
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  selector:
+    name: app
+  type: LoadBalancer

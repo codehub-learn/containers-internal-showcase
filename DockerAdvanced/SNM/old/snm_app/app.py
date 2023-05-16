@@ -1,18 +1,16 @@
 from flask import Flask
 from db import DB
 
+
 app = Flask(__name__)
 
+database = DB()
 
 
 @app.route('/')
-def hello():
-    return "Hello snm"
+def get_name():  # put application's code here
+    return "snm"
 
-@app.route('/testdb')
-def start_db():
-    mysqldb = DB()
-    return mysqldb.get_users()
 
 if __name__ == '__main__':
     app.run()

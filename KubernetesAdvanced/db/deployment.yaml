@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+  annotations: 
+  labels:
+    name: db
+spec:
+  revisionHistoryLimit: 0
+  replicas: 1
+  selector:
+    matchLabels:
+      name: db
+  template:
+    metadata:
+      annotations:
+      labels:
+        name: db
+    spec:
+      containers:
+        - name: db
+          image: docker.io/brokenleg/db:1.0
+          ports:
+            - containerPort: 3306
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+  labels:
+    name: db
+spec:
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+  selector:
+    name: db
+  type: ClusterIP
