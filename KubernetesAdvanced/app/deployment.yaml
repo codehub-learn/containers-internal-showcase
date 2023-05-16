@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: app
+  namespace: snm-app
   annotations: 
   labels:
     name: app
@@ -29,19 +30,4 @@ spec:
             - name: APP_PORT
               value: "5000"
             - name: DB_HOST
-              value: db.snm
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: app
-  labels:
-    name: app
-spec:
-  ports:
-    - protocol: TCP
-      port: 5000
-      targetPort: 5000
-  selector:
-    name: app
-  type: LoadBalancer
+              value: db.snm-db

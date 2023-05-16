@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: db
+  namespace: snm-db
   annotations: 
   labels:
     name: db
@@ -24,18 +25,4 @@ spec:
             - containerPort: 3306
           imagePullPolicy: IfNotPresent
       restartPolicy: Always
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: db
-  labels:
-    name: db
-spec:
-  ports:
-    - protocol: TCP
-      port: 3306
-      targetPort: 3306
-  selector:
-    name: db
-  type: ClusterIP
+
