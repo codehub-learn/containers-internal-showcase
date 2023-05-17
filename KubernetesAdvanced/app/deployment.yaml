@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+  namespace: snm-app
+  annotations: 
+  labels:
+    name: app
+spec:
+  revisionHistoryLimit: 0
+  replicas: 1
+  selector:
+    matchLabels:
+      name: app
+  template:
+    metadata:
+      annotations:
+      labels:
+        name: app
+    spec:
+      containers:
+        - name: app
+          image: docker.io/brokenleg/app:2.3
+          ports:
+            - containerPort: 5000
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: APP_HOSTNAME
+              value: "0.0.0.0"
+            - name: APP_PORT
+              value: "5000"
+            - name: DB_HOST
+              value: db.snm-db
