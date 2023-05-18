@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db2
+  namespace: snm-db
+  annotations: 
+  labels:
+    name: db
+spec:
+  revisionHistoryLimit: 0
+  replicas: 1
+  selector:
+    matchLabels:
+      name: db
+  template:
+    metadata:
+      annotations:
+      labels:
+        name: db
+    spec:
+      containers:
+        - name: db
+          image: docker.io/brokenleg/db:1.0
+          ports:
+            - containerPort: 3306
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+
