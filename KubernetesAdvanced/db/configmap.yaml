@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: db-cm
+  namespace: snm-db
+  labels:
+    name: db
+    app.kubernetes.io/name: db
+data:
+  primary.cnf: |
+    [mysqld]
+    log-bin
+  replica.cnf: |
+    [mysqld]
+    super-ready-only
