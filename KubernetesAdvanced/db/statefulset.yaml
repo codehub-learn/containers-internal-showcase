@@ -9,7 +9,7 @@ spec:
       app: db
       app.kubernetes.io/name: db
   serviceName: db
-  replicas: 2
+  replicas: 3
   template:
     metadata:
       labels:
@@ -18,14 +18,14 @@ spec:
     spec:
       initContainers:
         - name: init-mysql
-          image: mysql:8
+          image: docker.io/brokenleg/db:1.0
           command:
           - bash
           - "-c"
           - |
             set -ex
             [[ $HOSTNAME =~ -([0-9]+)$ ]] || exit 1
-            ordinal=$(BASH_REMATCH[1]}
+            ordinal=${BASH_REMATCH[1]}
             echo [mysqld] > /mnt/conf.d/server-id.cnf
             echo server-id=$((100 + $ordinal )) >> /mnt/conf.d/server-id.cnf
             if [[ $ordinal -eq 0 ]]; then
@@ -40,7 +40,7 @@ spec:
               mountPath: /mnt/config-map
       containers:
         - name: mysql
-          image: mysql:8
+          image: docker.io/brokenleg/db:1.0
           env:
             - name: MYSQL_ALLOW_EMPTY_PASSWORD
               value: "1"

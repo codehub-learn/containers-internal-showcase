@@ -8,8 +8,8 @@ metadata:
     app.kubernetes.io/name: db
 data:
   primary.cnf: |
-    [mysqld]
-    log-bin
+  [mysqld]
+  log-bin
   replica.cnf: |
-    [mysqld]
-    super-ready-only
+  [mysqld]
+  super-read-only
