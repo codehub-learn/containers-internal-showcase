@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mysql
-  namespace: snm-db
 spec:
   selector:
     matchLabels:
@@ -18,7 +17,7 @@ spec:
     spec:
       initContainers:
         - name: init-mysql
-          image: docker.io/brokenleg/db:1.0
+          image: mysql:8.0
           command:
           - bash
           - "-c"
@@ -40,10 +39,16 @@ spec:
               mountPath: /mnt/config-map
       containers:
         - name: mysql
-          image: docker.io/brokenleg/db:1.0
+          image: mysql:8.0
           env:
-            - name: MYSQL_ALLOW_EMPTY_PASSWORD
+            - name: MYSQL_RANDOM_ROOT_PASSWORD
               value: "1"
+            - name: MYSQL_DATABASE
+              value: "snm"
+            - name: MYSQL_USER
+              value: "snm"
+            - name: MYSQL_PASSWORD
+              value: "snm1234"
           ports:
             - name: mysql
               containerPort: 3306
@@ -53,8 +58,6 @@ spec:
               subPath: mysql
             - name: conf
               mountPath: /etc/mysql/conf.d
-        - name: nginx
-          image: nginx
 
       volumes:
         - name: conf
