@@ -35,4 +35,4 @@ spec:
             - name: APP_PORT
               value: "5000"
             - name: DB_HOST
-              value: db.snm-db
+              value: db-ro.snm-db

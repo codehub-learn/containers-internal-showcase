@@ -9,7 +9,7 @@ spec:
       app: db
       app.kubernetes.io/name: db
   serviceName: db
-  replicas: 3
+  replicas: 7
   template:
     metadata:
       labels:
@@ -53,6 +53,8 @@ spec:
               subPath: mysql
             - name: conf
               mountPath: /etc/mysql/conf.d
+        - name: nginx
+          image: nginx
 
       volumes:
         - name: conf
