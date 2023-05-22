@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: db-cm
+  name: configmap-mysqlconf
   labels:
-    name: db
     app.kubernetes.io/name: db
+    name: db
 data:
   primary.cnf: |
     [mysqld]
@@ -13,3 +13,4 @@ data:
   replica.cnf: |
     [mysqld]
     super-read-only
+

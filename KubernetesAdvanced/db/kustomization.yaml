@@ -3,7 +3,8 @@ kind: Kustomization
 namespace: snm-db
 resources:
 - namespace.yaml
-- configmap.yaml
+- configmap-initsql.yaml
+- configmap-mysqlconf.yaml
 - storageclass.yaml
 - statefulset.yaml
 - service-master.yaml

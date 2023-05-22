@@ -35,7 +35,7 @@ spec:
           volumeMounts:
             - name: conf
               mountPath: /mnt/conf.d
-            - name: config-map
+            - name: mysqlconf
               mountPath: /mnt/config-map
       containers:
         - name: mysql
@@ -56,15 +56,21 @@ spec:
             - name: data
               mountPath: /var/lib/mysql
               subPath: mysql
+            - name: initsql
+              mountPath: /docker-entrypoint-initdb.d/
             - name: conf
               mountPath: /etc/mysql/conf.d
 
       volumes:
         - name: conf
           emptyDir: {}
-        - name: config-map
+        - name: mysqlconf
           configMap:
-            name: db-cm
+            name: configmap-mysqlconf
+        - name: initsql
+          configMap:
+            name: configmap-initsql
+
   volumeClaimTemplates:
   - metadata:
       name: data
