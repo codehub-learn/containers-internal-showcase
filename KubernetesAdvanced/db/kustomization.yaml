@@ -5,6 +5,7 @@ resources:
 - namespace.yaml
 - configmap-initsql.yaml
 - configmap-mysqlconf.yaml
+- secret-dbcreds.yaml
 - storageclass.yaml
 - statefulset.yaml
 - service-master.yaml

@@ -46,9 +46,15 @@ spec:
             - name: MYSQL_DATABASE
               value: "snm"
             - name: MYSQL_USER
-              value: "snm"
+              valueFrom:
+                secretKeyRef:
+                  name: secret-dbcreds
+                  key: username
             - name: MYSQL_PASSWORD
-              value: "snm1234"
+              valueFrom:
+                secretKeyRef:
+                  name: secret-dbcreds
+                  key: password
           ports:
             - name: mysql
               containerPort: 3306

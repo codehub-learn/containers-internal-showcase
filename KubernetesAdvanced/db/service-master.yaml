@@ -11,4 +11,4 @@ spec:
       port: 3306
   selector:
     app: db
-  type: LoadBalancer
+  type: ClusterIP
