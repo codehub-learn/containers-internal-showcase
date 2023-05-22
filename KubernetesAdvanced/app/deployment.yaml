@@ -36,3 +36,7 @@ spec:
               value: "5000"
             - name: DB_HOST
               value: db-ro.snm-db
+            - name: DB_USERNAME
+              value: "snm"
+            - name: DB_PASSWORD
+              value: "snm1234"
