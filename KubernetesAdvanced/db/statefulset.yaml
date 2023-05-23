@@ -8,7 +8,7 @@ spec:
       app: db
       app.kubernetes.io/name: db
   serviceName: db
-  replicas: 7
+  replicas: 3
   template:
     metadata:
       labels:
