@@ -37,6 +37,14 @@ spec:
             - name: DB_HOST
               value: db-ro.snm-db
             - name: DB_USERNAME
-              value: "snm"
+              valueFrom:
+                secretKeyRef:
+                  name: secret-dbcreds
+                  key: username
             - name: DB_PASSWORD
-              value: "snm1234"
+              valueFrom:
+                secretKeyRef:
+                  name: secret-dbcreds
+                  key: password
+      serviceAccountName: secret-reader
+

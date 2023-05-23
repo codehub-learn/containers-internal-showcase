@@ -3,6 +3,10 @@ kind: Kustomization
 namespace: snm-app
 resources:
 - namespace.yaml
+- role.yaml
+- rolebinding.yaml
+- secret-dbcreds.yaml
+- serviceaccount.yaml
 - deployment.yaml
 - hpa.yaml
 - service.yaml
