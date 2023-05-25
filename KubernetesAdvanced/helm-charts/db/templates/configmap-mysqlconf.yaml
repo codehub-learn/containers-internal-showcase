@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap-mysqlconf
+  labels:
+    app.kubernetes.io/name: db
+    name: db
+data:
+  primary.cnf: |
+    [mysqld]
+    log-bin
+    bind-address=0.0.0.0
+  replica.cnf: |
+    [mysqld]
+    super-read-only
+
