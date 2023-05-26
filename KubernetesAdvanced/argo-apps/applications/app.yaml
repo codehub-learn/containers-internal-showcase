@@ -18,9 +18,7 @@ spec:
     path: KubernetesAdvanced/helm-charts/app
     helm:
       values: |
-        labels:
-          env: alpha2
-          kostas: makedos
+        replicas: 2
   destination: 
     server: https://kubernetes.default.svc
     namespace: snm-app
