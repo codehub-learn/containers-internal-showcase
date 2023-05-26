@@ -10,3 +10,4 @@ resources:
 - statefulset.yaml
 - service-master.yaml
 - service-ro.yaml
+- mynewapp
