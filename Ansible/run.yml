@@ -1,0 +1,22 @@
+---
+- name: Hello world
+  hosts: debian_servers
+  vars:
+    message: "Play Vars"
+  tasks:
+    - name: hello world
+      vars:
+        message: "Task var"
+      debug:
+        msg: "{{ message }}"
+
+
+    - name: Run some command
+      ansible.builtin.shell: "/bin/ls /"
+      register: ls_result
+    
+    - name: Print ls_result
+      ansible.builtin.debug:
+        msg: "{{ ls_result.stdout }}"
+        
+  
