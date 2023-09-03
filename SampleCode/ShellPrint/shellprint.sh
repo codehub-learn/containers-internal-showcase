@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "Starting"
 MAXTIMES=${1:-1}
 i=0
 while [ $i -lt $MAXTIMES ]; do
