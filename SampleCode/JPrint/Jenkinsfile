@@ -35,7 +35,7 @@ pipeline {
             }
             post {
                 success{
-                    archiveArtifacts artifacts: "**/target/*.jar'
+                    archiveArtifacts artifacts: "**/target/*.jar"
                 }
             }
         }
@@ -43,7 +43,7 @@ pipeline {
     }
     post {
         always{
-            junit '**/target/surefire-reports/*.xml'
+            junit "**/target/surefire-reports/*.xml"
         }
     }
 }
