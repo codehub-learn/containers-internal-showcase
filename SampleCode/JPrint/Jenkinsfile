@@ -6,7 +6,7 @@ pipeline {
     options {
         timestamps()
     }
-    
+
     stages {
         stage('Build') { 
             steps { 
@@ -17,9 +17,33 @@ pipeline {
         }
         stage('Test') { 
             steps { 
-                echo "Building $JOB_NAME" 
+                dir("SampleCode/JPrint/"){
+                    sh 'mvn clean test'
+                }
+            }
+            post {
+                failure{
+                    archiveArtifacts artifacts: "**/target/surefire-reports/*.xml"
+                }
+            }
+        }
+        stage('Publish') { 
+            steps { 
+                dir("SampleCode/JPrint/"){
+                    sh 'mvn package -Dmaven.test.skip=true'
+                }
+            }
+            post {
+                success{
+                    archiveArtifacts artifacts: "**/target/*.jar'
+                }
             }
         }
         
+    }
+    post {
+        always{
+            junit '**/target/surefire-reports/*.xml'
+        }
     }
 }
