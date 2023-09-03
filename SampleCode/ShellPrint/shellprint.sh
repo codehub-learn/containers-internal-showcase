@@ -1,5 +1,5 @@
 #!/bin/bash
-echo "Starting"
+echo "Starting our script"
 MAXTIMES=${1:-1}
 i=0
 while [ $i -lt $MAXTIMES ]; do
