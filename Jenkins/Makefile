@@ -5,4 +5,7 @@ clean:
 	-docker stop jenkins
 	-docker rm jenkins
 volume:
-	-docker create volume jenkins-vol
+	-docker volume create jenkins-vol
+
+volume_clean:
+	-docker volume rm jenkins-vol
