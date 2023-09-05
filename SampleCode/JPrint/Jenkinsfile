@@ -14,7 +14,7 @@ pipeline {
                 credentialsId: "github",
                 url: "https://github.com/codehub-learn/containers-internal-showcase.git"
                 }
-
+        }
         stage('Build') { 
             steps { 
                 dir("SampleCode/JPrint/"){
