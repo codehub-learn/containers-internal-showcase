@@ -43,6 +43,9 @@ pipeline {
             post {
                 success{
                     archiveArtifacts artifacts: "**/target/*.jar"
+                    mail to: "kmakedos@athtech.gr",
+                    subject: "Build Successfull: $BUILD_TAG",
+                    body: "Link to JOB $BUILD_URL"
                 }
             }
         }
