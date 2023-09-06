@@ -51,6 +51,13 @@ pipeline {
                 }               
             }
         }
+         stage ('Create docker Image') {
+            steps {
+                 script{
+                     dockerImage = docker.build imagename
+                }
+            }
+        }
         
     }
     post {
