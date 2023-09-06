@@ -4,8 +4,10 @@ RUN apt-get update && apt-get install -y \
 	openjdk-11-jdk \
 	python3 \
 	sudo \
+	git \
 	iproute2 \
-	wget 
+	wget  \
+	docker.io
 EXPOSE 22
 COPY start.sh /start.sh
 RUN chmod 700 /start.sh
