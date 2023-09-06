@@ -6,6 +6,11 @@ pipeline {
     options {
         timestamps()
     }
+    environment {
+        imagename = "brokenleg/jprint"
+        dockercredentials = 'dockerhub'
+        dockerImage = ''
+    }
 
     stages {
         stage ('Checkout'){
