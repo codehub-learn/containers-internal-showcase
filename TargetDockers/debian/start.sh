@@ -1,4 +1,4 @@
 #!/bin/bash
 
 service ssh start
-sleep 3600
+sleep 86400

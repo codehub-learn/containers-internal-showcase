@@ -1,6 +1,7 @@
 FROM debian:bullseye-slim
 RUN apt-get update && apt-get install -y \
 	openssh-server \
+	openjdk-11-jdk \
 	python3 \
 	sudo \
 	iproute2 \
