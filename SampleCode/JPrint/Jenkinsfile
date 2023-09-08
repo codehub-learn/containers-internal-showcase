@@ -96,9 +96,11 @@ pipeline {
         }
         always{
             junit "**/target/surefire-reports/*.xml"
-            docker {
-
+            script {
+                sh "docker container stop jprint"
+                sh "docker container rm jprint"
             }
+
         }
     }
 }
