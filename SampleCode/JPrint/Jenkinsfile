@@ -75,10 +75,7 @@ pipeline {
          stage('Deploy Image in container') {
             steps{
                 script{
-
-                    sh "docker container stop \$(docker container ls -a -q)"
-                    sh "docker container rm \$(docker container ls -a -q)"
-                    docker.image(imagename).run('-p 8081:8080')
+                    docker.image(imagename).run('-p 8900:8900')
                 }
             }
         }
