@@ -75,9 +75,6 @@ pipeline {
          stage('Deploy Image in container') {
             steps{
                 script{
-
-                    sh "docker container stop \$(docker container ls  -q )"
-                    sh "docker container rm \$(docker container ls  -q)"
                     docker{
                         image imagename
                         args '-p 8081:8080 --name jprint' 
