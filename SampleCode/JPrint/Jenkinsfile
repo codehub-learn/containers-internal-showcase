@@ -54,7 +54,7 @@ pipeline {
             }
         }
          stage ('Create docker Image') {
-            steps {:withRegistry
+            steps {
                 dir("SampleCode/JPrint/"){
                     script{
                         dockerImage = docker.build imagename
