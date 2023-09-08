@@ -54,7 +54,7 @@ pipeline {
             }
         }
          stage ('Create docker Image') {
-            steps {
+            steps {:withRegistry
                 dir("SampleCode/JPrint/"){
                     script{
                         dockerImage = docker.build imagename
@@ -75,7 +75,13 @@ pipeline {
          stage('Deploy Image in container') {
             steps{
                 script{
-                    docker.image(imagename).run('-p 8900:8900')
+
+                    sh "docker container stop \$(docker container ls  -q )"
+                    sh "docker container rm \$(docker container ls  -q)"
+                    docker{
+                        image imagename
+                        args '-p 8081:8080 --name jprint' 
+                    }
                 }
             }
         }
@@ -90,6 +96,9 @@ pipeline {
         }
         always{
             junit "**/target/surefire-reports/*.xml"
+            docker {
+
+            }
         }
     }
 }
