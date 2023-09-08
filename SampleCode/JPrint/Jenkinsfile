@@ -41,7 +41,7 @@ pipeline {
                 }
             }
         }
-        stage('Publish') { 
+        stage('Package') { 
             steps { 
                 dir("SampleCode/JPrint/"){
                     sh 'mvn package -Dmaven.test.skip=true'
@@ -58,6 +58,16 @@ pipeline {
                 dir("SampleCode/JPrint/"){
                     script{
                         dockerImage = docker.build imagename
+                    }
+                }
+            }
+        }
+        stage('Push image to registry') {
+            steps{
+                script {
+                    docker.withRegistry( '', dockercredentials ) {
+                        dockerImage.push("$BUILD_NUMBER")
+                        dockerImage.push('latest')
                     }
                 }
             }
