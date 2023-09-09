@@ -86,7 +86,7 @@ pipeline {
                 }
             }
         }
-        stage('Publish image to registry') {
+        stage('Release image to registry') {
             steps{
                 script {
                     docker.withRegistry( '', dockercredentials ) {
