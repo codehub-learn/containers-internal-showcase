@@ -58,6 +58,11 @@ pipeline {
                 dir("SampleCode/JPrint/"){
                     script{
                         dockerImage = docker.build imagename
+                        try {
+                            sh "docker network create test-jprint"
+                        } catch (err) {
+                            echo err.getMessage()
+                        }
                     }
                 }
             }
@@ -101,6 +106,7 @@ pipeline {
                 try{
                     sh "docker container stop jprint"
                     sh "docker container rm jprint"
+                    sh "docker network rm jprint"
                 }catch (err) {
                     echo "Deleting container failed..."
                 }

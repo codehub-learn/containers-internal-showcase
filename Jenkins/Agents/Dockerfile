@@ -2,7 +2,7 @@ FROM debian:bullseye-slim
 RUN groupadd -g 1001 docker
 RUN apt-get update && apt-get install -y \
 	openssh-server \
-	openjdk-11-jdk \
+	openjdk-11-jdk-headless \
 	python3 \
 	sudo \
 	git \
