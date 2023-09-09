@@ -93,13 +93,15 @@ pipeline {
         }
         always{
             junit "**/target/surefire-reports/*.xml"
-            try {
-                script {
-                    sh "docker container stop jprint"
-                    sh "docker container rm jprint"
+            steps {
+                try {
+                    script {
+                        sh "docker container stop jprint"
+                        sh "docker container rm jprint"
+                    }
+                }catch(err){
+                    echo err.getMessage()
                 }
-            }catch(err){
-                echo err.getMessage()
             }
 
 
