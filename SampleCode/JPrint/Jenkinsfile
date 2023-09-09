@@ -75,7 +75,7 @@ pipeline {
         stage('Deploy Image in container') {
             steps{
                     script{
-                        docker.image(imagename).run('-p 8900:8900 --name jprint')
+                        docker.image(imagename).run('-d -p 8900:8900 --name jprint')
                     }
                 }
             }
