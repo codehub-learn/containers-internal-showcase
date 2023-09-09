@@ -28,3 +28,16 @@ network:
 
 network_clean:
 	-docker network rm jenkins
+
+prometheus: network prometheus_clean
+	docker run \
+    -p 9090:9090 \
+	--network jenkins \
+	--name prometheus \
+	-v /var/run/docker.sock:/var/run/docker.sock \
+    -v $(shell pwd)/prometheus.yml:/etc/prometheus/prometheus.yml \
+    prom/prometheus
+
+prometheus_clean:
+	-docker stop prometheus
+	-docker rm prometheus
