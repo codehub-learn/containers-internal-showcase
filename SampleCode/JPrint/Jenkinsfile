@@ -72,7 +72,7 @@ pipeline {
                 }
             }
         }
-/*        stage('Deploy Image in container') {
+        stage('Deploy Image in container') {
             steps{
                     script{
                         docker.image(imagename).run('-d -p 8900:8900 --name jprint --network jenkins')
@@ -85,7 +85,18 @@ pipeline {
                     sh "curl -v http://jprint:8900 "
                 }
             }
-        }*/
+        }
+        stage('Publish image to registry') {
+            steps{
+                script {
+                    docker.withRegistry( '', dockercredentials ) {
+                        dockerImage.push('STABLE')
+                        dockerImage.push("RELEASE-$BUILD_NUMBER")
+                    }
+                }
+            }
+        }
+ 
     }
         
     post {
