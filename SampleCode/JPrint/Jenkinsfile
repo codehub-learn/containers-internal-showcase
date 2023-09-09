@@ -88,7 +88,6 @@ pipeline {
             }
         }*/
         
-    }
     post {
         failure {
             mail to: "kmakedos@athtech.gr",
