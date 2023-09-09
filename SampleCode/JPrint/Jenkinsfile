@@ -29,7 +29,7 @@ pipeline {
                 }
             }
         }
-        stage('Test') { 
+        stage('Unit Testing') { 
             steps { 
                 dir("SampleCode/JPrint/"){
                     sh 'mvn clean test'
@@ -62,7 +62,7 @@ pipeline {
                 }
             }
         }
-        stage('Push image to registry') {
+        stage('Deliver image to registry') {
             steps{
                 script {
                     docker.withRegistry( '', dockercredentials ) {
@@ -79,7 +79,7 @@ pipeline {
                     }
                 }
             }
-        stage('Integrations tests') {
+        stage('Run Integrations tests') {
             steps{
                 script{
                     sh "curl -v http://jprint:8900 "
