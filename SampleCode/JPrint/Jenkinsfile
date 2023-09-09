@@ -58,11 +58,6 @@ pipeline {
                 dir("SampleCode/JPrint/"){
                     script{
                         dockerImage = docker.build imagename
-                        try {
-                            sh "docker network create test-jprint"
-                        } catch (err) {
-                            echo err.getMessage()
-                        }
                     }
                 }
             }
@@ -80,14 +75,14 @@ pipeline {
         stage('Deploy Image in container') {
             steps{
                     script{
-                        docker.image(imagename).run('-d -p 8900:8900 --name jprint')
+                        docker.image(imagename).run('-d -p 8900:8900 --name jprint --network jenkins')
                     }
                 }
             }
         stage('Integrations tests') {
             steps{
                 script{
-                    sh "wget  http://localhost:8900 -O -"
+                    sh "curl -v http://jprint:8900 "
                 }
             }
         }
@@ -106,7 +101,6 @@ pipeline {
                 try{
                     sh "docker container stop jprint"
                     sh "docker container rm jprint"
-                    sh "docker network rm jprint"
                 }catch (err) {
                     echo "Deleting container failed..."
                 }
