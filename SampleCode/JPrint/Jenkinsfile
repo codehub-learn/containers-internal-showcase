@@ -82,7 +82,7 @@ pipeline {
         stage('Integrations tests') {
             steps{
                 script{
-                    sh "curl -v http://localhost:8900"
+                    sh "wget  http://localhost:8900 -O -"
                 }
             }
         }

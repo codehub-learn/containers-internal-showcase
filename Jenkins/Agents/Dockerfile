@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
 	git \
 	iproute2 \
 	wget  \
+    curl \
 	docker.io
 EXPOSE 22
 COPY start.sh /start.sh
