@@ -1,6 +1,8 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib import parse
 import json
+import argparse
+import platform
 
 
 class Model:
@@ -39,10 +41,16 @@ def controller(model):
     return GetHandler
 
 
-def main(hostname="localhost", port=8000):
+def main(hostname, port):
     server = HTTPServer((hostname, port), controller(Model()))
+    print(f"Node info: {platform.node()}")
+    print(f"Starting server listening on: {hostname}:{port}")
     server.serve_forever()
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("hostname", help="Hostname")
+    parser.add_argument("port", help="Port to listen to")
+    args = vars(parser.parse_args())
+    main(args["hostname"], int(args["port"]))

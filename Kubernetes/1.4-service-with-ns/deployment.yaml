@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mypod
+  namespace: myweb
+  labels:
+    env: dev
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: webs
+      env: dev
+  template:
+    metadata:
+      labels:
+        app: webs
+        env: dev
+    spec:
+      containers:
+        - name: alpha
+          image: nginx
+          ports:
+          - containerPort: 80
+        - name: beta
+          image: brokenleg/serverapp:1.2
+          ports:
+          - containerPort: 8000
