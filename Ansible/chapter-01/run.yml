@@ -1,0 +1,13 @@
+---
+- name: Hello world
+  hosts: all
+  tasks:
+    - name: Say hi to people
+      debug:
+        msg: "{{ message }}"
+- name: Hello world again
+  hosts: debian_servers
+  tasks:
+    - name: Give an inspiring message
+      debug:
+        msg: "{{ message2 }}"
