@@ -1,0 +1,16 @@
+  - name: Install Nginx
+    package:
+      name: nginx
+      state: latest
+    become: true
+
+  - name: Check Nginx Status in Fedora
+    stat:
+      path: /run/nginx.pid
+    register: nginx_pid_status
+
+  - name: Start Nginx
+    ansible.builtin.command:
+      cmd: nginx
+    become: true
+    when: not nginx_pid_status.stat.exists

@@ -1,0 +1,6 @@
+- hosts: web_servers
+  roles:
+    - { role: nginx }
+- hosts: backend_servers
+  roles:
+    - { role: userapp }
