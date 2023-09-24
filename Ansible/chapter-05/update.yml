@@ -1,0 +1,28 @@
+---
+- name: Copy files
+  hosts: all
+  tasks: 
+
+  - name: Copy index.html
+    copy:
+      src: "{{ index_file }}"
+      dest: "{{ index_file_dest }}/index.html"
+      owner: "{{ www_user }}"
+      group: "{{ www_user }}"
+    become: true
+
+  - name: Copy config_file
+    copy:
+      src: nginx.conf
+      dest: /etc/nginx
+      owner: root
+      group: root
+      mode: 0600
+    notify: Nginx Reload
+    become: true
+    when: ansible_facts['os_family'] == "RedHat"
+
+  handlers:
+    - name: Nginx Reload
+      command: nginx -s reload
+      become: true  

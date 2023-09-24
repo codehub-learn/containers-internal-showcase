@@ -4,8 +4,7 @@
   tasks:
     - name: Say hi to people
       debug:
-        msg: "Hello World"
-
+        msg: "{{ message }}"
 
 
 - name: Hello world again
@@ -13,4 +12,4 @@
   tasks:
     - name: Give an inspiring message
       debug:
-        msg: "Hello world again"
+        msg: "{{ message2 }}"

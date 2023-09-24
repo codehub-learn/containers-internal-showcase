@@ -1,0 +1,6 @@
+folder_list:
+  - /var/run/db
+  - /opt/local/database
+  - /usr/local/html
+
+www_user: madfed
