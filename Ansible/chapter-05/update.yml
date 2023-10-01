@@ -11,6 +11,14 @@
       group: "{{ www_user }}"
     become: true
 
+  - name: Delete default nginx
+    file:
+      path: /etc/nginx/nginx.conf.default
+      state: absent
+    become: true
+    when: ansible_facts['os_family'] == "RedHat"
+
+
   - name: Copy config_file
     copy:
       src: nginx.conf
@@ -18,8 +26,8 @@
       owner: root
       group: root
       mode: 0600
-    notify: Nginx Reload
     become: true
+    notify: Nginx Reload
     when: ansible_facts['os_family'] == "RedHat"
 
   handlers:

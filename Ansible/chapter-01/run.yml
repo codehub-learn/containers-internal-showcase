@@ -1,6 +1,8 @@
 ---
 - name: Hello world
   hosts: all
+  vars:
+    message: "Gello"
   tasks:
     - name: Say hi to people
       debug:
@@ -13,3 +15,15 @@
     - name: Give an inspiring message
       debug:
         msg: "{{ message2 }}"
+
+
+- name: Register a var
+  hosts: debian_servers
+  tasks:  
+    - name: Register
+      ansible.builtin.shell: /bin/ls /
+      register: ls_result
+
+    - name: Print ls output
+      debug:  
+        msg: "{{ ls_result.stdout }}"

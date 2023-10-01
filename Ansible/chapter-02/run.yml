@@ -3,7 +3,7 @@
   hosts: debian_servers
   tasks:
     - name: Install Apache
-      package:
+      apt:
         name: apache2
         state: latest
       become: true

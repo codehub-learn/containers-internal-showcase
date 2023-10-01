@@ -5,7 +5,7 @@
   - name: Add Groups
     group:
       name: "{{ item }}"
-    with_items: "{{ www_user }}"
+    with_items: "{{ www_users }}"
     become: true
 
   - name: Add Users
@@ -13,14 +13,14 @@
       name: "{{ item }}"
       group: "{{ item }}"
       shell: "/bin/bash"
-    with_items: "{{ www_user }}"
+    with_items: "{{ www_users }}"
     become: true
 
   - name: Create Folders 
     file:
       path: "{{ item }}"
-      owner: "{{ www_user }}"
-      group: "{{ www_user }}"
+      owner: "{{ www_users[0] }}"
+      group: "{{ www_users[1] }}"
       state: directory
       recurse: true
     with_items: "{{ folder_list }}"

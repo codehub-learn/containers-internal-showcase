@@ -1,0 +1,21 @@
+- hosts: all
+  roles:
+    - setup
+
+- hosts: frontend_servers
+  roles:
+    - nginx
+
+- hosts: web_servers
+  roles:
+    - apache2
+
+- hosts: db
+  roles:
+    - migrate_db
+    - postgres
+
+- hosts: backend_servers
+  roles:
+    - userapp
+

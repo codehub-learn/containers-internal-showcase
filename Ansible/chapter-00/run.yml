@@ -5,7 +5,7 @@
     - name: Say hi to people
       debug:
         msg: "Hello World"
-
+      become_user: kostas
 
 
 - name: Hello world again
@@ -14,3 +14,17 @@
     - name: Give an inspiring message
       debug:
         msg: "Hello world again"
+
+
+- name: Set up Web server 
+  hosts: web_servers
+  tasks:
+    - name: Install apache
+      package:
+        ...
+    - name: Copy apache.conf
+      copy:
+        ...
+    - name: Copy html files
+      copy:
+        ...

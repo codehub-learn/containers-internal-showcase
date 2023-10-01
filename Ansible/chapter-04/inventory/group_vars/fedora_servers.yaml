@@ -4,3 +4,5 @@ folder_list:
   - /usr/local/html
 
 www_user: madfed
+www_users:
+  - madfed

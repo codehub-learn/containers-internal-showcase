@@ -4,3 +4,6 @@ folder_list:
   - /usr/local/db
 
 www_user: maddeb
+www_users:
+  - maddeb
+  - madcow
