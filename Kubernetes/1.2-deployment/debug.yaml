@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "2"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"env":"dev"},"name":"mypod","namespace":"default"},"spec":{"replicas":4,"selector":{"matchLabels":{"app":"webs","env":"dev"}},"strategy":{"rollingUpdate":{"maxSurge":2,"maxUnavailable":1},"type":"RollingUpdate"},"template":{"metadata":{"labels":{"app":"webs","env":"dev"}},"spec":{"containers":[{"image":"nginx","name":"alpha","ports":[{"containerPort":8080}]},{"image":"brokenleg/serverapp:1.2","name":"beta","ports":[{"containerPort":8000}]}]}}}}
+  creationTimestamp: "2023-10-02T08:58:07Z"
+  generation: 2
+  labels:
+    env: dev
+  name: mypod
+  namespace: default
+  resourceVersion: "309639"
+  uid: c9e041e0-0cc0-4def-8286-9342c8ba75f5
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 4
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: webs
+      env: dev
+  strategy:
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: webs
+        env: dev
+    spec:
+      containers:
+      - image: nginx
+        imagePullPolicy: Always
+        name: alpha
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      - image: brokenleg/serverapp:1.2
+        imagePullPolicy: IfNotPresent
+        name: beta
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 4
+  conditions:
+  - lastTransitionTime: "2023-10-02T08:58:12Z"
+    lastUpdateTime: "2023-10-02T08:58:12Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2023-10-02T08:58:07Z"
+    lastUpdateTime: "2023-10-02T08:58:40Z"
+    message: ReplicaSet "mypod-748476bd44" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 2
+  readyReplicas: 4
+  replicas: 4
+  updatedReplicas: 4

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+    - name: alpha
+      image: nginx
+    - name: beta
+      image: brokenleg/serverapp:1.2
+    - name: gamma
+      image: httpd
+    
