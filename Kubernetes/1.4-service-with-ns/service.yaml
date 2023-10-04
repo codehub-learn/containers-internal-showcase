@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata: 
-  name: webcluster
-  namespace: myweb
+  name: pyservice
+  namespace: pyhub
 spec:
   selector:
     app: webs 

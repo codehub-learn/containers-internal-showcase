@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mypod
-  namespace: myweb
+  name: pydep
+  namespace: pyhub
   labels:
     env: dev
 spec:
-  replicas: 1
+  replicas: 8
   strategy:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 2
-      maxUnavailable: 0
+      maxUnavailable: 2
   selector:
     matchLabels:
       app: webs
@@ -23,11 +23,7 @@ spec:
         env: dev
     spec:
       containers:
-        - name: alpha
-          image: nginx
-          ports:
-          - containerPort: 80
-        - name: beta
-          image: brokenleg/serverapp:1.2
+        - name: pyapp
+          image: brokenleg/pyapp:1.3
           ports:
           - containerPort: 8000
