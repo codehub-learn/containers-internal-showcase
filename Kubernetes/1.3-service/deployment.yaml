@@ -9,8 +9,8 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 2
-      maxUnavailable: 0
+      maxSurge: 1
+      maxUnavailable: 1
   selector:
     matchLabels:
       app: webs
@@ -23,6 +23,15 @@ spec:
     spec:
       containers:
         - name: pyapp
-          image: brokenleg/pyapp:1.3
+          image: brokenleg/pyapp:3.6
           ports:
           - containerPort: 8000
+          volumeMounts:
+            - name: mytext
+              mountPath: /tmp/mytext.txt
+
+  volumes: 
+    - name: mytext
+      configMap: 
+        name: manifest-example
+

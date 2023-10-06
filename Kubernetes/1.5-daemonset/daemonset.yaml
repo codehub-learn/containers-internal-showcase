@@ -2,9 +2,10 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: pyset
+  labels:
+    developer-name: kostas
 spec:
   revisionHistoryLimit: 4
-  replicas: 4
   selector:
     matchLabels:
       app: pyapp
