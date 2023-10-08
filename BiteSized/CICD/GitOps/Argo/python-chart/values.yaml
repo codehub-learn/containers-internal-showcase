@@ -8,7 +8,7 @@ image:
   repository: brokenleg/pyapp
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "1.3"
 
 imagePullSecrets: []
 nameOverride: ""
