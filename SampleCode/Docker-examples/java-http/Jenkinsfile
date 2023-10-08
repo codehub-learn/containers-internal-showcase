@@ -1,3 +1,5 @@
+def PATH_TO_POM="SampleCode/Docker-examples/java-http"
+
 pipeline { 
     agent {
         label 'docker'
@@ -24,14 +26,14 @@ pipeline {
         }
         stage('Build') { 
             steps { 
-                dir("SampleCode/Docker-examples/java-http/"){
+                dir("${PATH_TO_POM}"){
                     sh 'mvn clean compile'
                 }
             }
         }
         stage('Unit Testing') { 
             steps { 
-                dir("SampleCode/JPrint/"){
+                dir("${PATH_TO_POM}"){
                     sh 'mvn clean test'
                 }
             }
@@ -43,7 +45,7 @@ pipeline {
         }
         stage('Package') { 
             steps { 
-                dir("SampleCode/JPrint/"){
+                dir("${PATH_TO_POM}"){
                     sh 'mvn package -Dmaven.test.skip=true'
                 }
             }
@@ -55,7 +57,7 @@ pipeline {
         }
          stage ('Create docker Image') {
             steps {
-                dir("SampleCode/Docker-examples/java-http"){
+                dir("${PATH_TO_POM}"){
                     script{
                         dockerImage = docker.build imagename
                     }
