@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: webapp
+  name: webapp
+  namespace: codeweb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: webapp
+    spec:
+      containers:
+      - image: localhost:5000/webapp:latest
+        name: webapp
+        ports: 
+          - containerPort: 8000
+            name: http-webapp
+        env:
+          - name: REDIS_HOST
+            value: redis.codered

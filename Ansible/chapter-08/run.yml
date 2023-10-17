@@ -10,11 +10,6 @@
   roles:
     - apache2
 
-- hosts: db
-  roles:
-    - migrate_db
-    - postgres
-
 - hosts: backend_servers
   roles:
     - userapp

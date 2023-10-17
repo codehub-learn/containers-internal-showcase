@@ -11,6 +11,7 @@
     mode: 0755
     owner: "{{ user }}"
   become: true
+  debugger: always
 
 
 - name: Start python3 app server

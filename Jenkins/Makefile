@@ -1,27 +1,28 @@
+JENKINS_NAME?=jenkins
 .ONESHELL:
 
 run: clean volume network
-	docker run -it -p 8080:8080 -v jenkins-vol:/var/jenkins_home --network jenkins  --name jenkins jenkins/jenkins:lts-jdk11
+	docker run -it -p 8080:8080 -v $(JENKINS_NAME)-vol:/var/jenkins_home --network jenkins  --name $(JENKINS_NAME) jenkins/jenkins:lts-jdk11
 
 run-agent: clean-agent build-agent network
-	docker run -it -p 2022:22 -v /var/run/docker.sock:/var/run/docker.sock --network jenkins --name jenkins-agent jenkins-agent
+	docker run -it -p 2022:22 -v /var/run/docker.sock:/var/run/docker.sock --network jenkins --name $(JENKINS_NAME)-agent jenkins-agent
 
 build-agent:
 	cd Agents
 	docker build -t jenkins-agent .
 	
 clean-agent:
-	-docker stop jenkins-agent
-	-docker rm jenkins-agent
+	-docker stop $(JENKINS_NAME)-agent
+	-docker rm $(JENKINS_NAME)-agent
 
 clean:
-	-docker stop jenkins
-	-docker rm jenkins
+	-docker stop $(JENKINS_NAME)
+	-docker rm $(JENKINS_NAME)
 volume:
-	-docker volume create jenkins-vol
+	-docker volume create $(JENKINS_NAME)-vol
 
 volume_clean:
-	-docker volume rm jenkins-vol
+	-docker volume rm $(JENKINS_NAME)-vol
 
 network:
 	-docker network create jenkins 

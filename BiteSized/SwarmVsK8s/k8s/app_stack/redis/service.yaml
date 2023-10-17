@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: codered
+spec:
+  selector:
+    app: redis
+  ports:
+  - name: tcp-redis-svc
+    port: 6379
+    protocol: TCP
+    targetPort: tcp-redis
+  type: ClusterIP
