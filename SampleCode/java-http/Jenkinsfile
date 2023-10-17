@@ -1,4 +1,4 @@
-def PATH_TO_POM="SampleCode/Docker-examples/java-http"
+def PATH_TO_POM="SampleCode/java-http"
 
 pipeline { 
     agent {
