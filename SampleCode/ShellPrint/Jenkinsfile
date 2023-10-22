@@ -81,10 +81,10 @@ pipeline {
                     }
                 }
             }
-        }*/
+        }
  
+        
     }
-    /*    
     post {
             failure {
                 mail to: "kmakedos@athtech.gr",
@@ -92,5 +92,7 @@ pipeline {
                 body: "Link to JOB $BUILD_URL"
             }
         }
-    }*/
+    }
+    */
+    }
 }

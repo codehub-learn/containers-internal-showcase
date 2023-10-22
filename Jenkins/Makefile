@@ -21,16 +21,16 @@ clean:
 volume:
 	-docker volume create $(JENKINS_NAME)-vol
 
-volume_clean:
+clean-volume:
 	-docker volume rm $(JENKINS_NAME)-vol
 
 network:
 	-docker network create jenkins 
 
-network_clean:
+clean-network:
 	-docker network rm jenkins
 
-prometheus: network prometheus_clean
+prometheus: network clean-prometheus
 	docker run \
     -p 9090:9090 \
 	--network jenkins \
@@ -39,6 +39,6 @@ prometheus: network prometheus_clean
     -v $(shell pwd)/prometheus.yml:/etc/prometheus/prometheus.yml \
     prom/prometheus
 
-prometheus_clean:
+clean-prometheus:
 	-docker stop prometheus
 	-docker rm prometheus
