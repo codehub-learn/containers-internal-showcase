@@ -12,7 +12,7 @@ class JPrint {
         HttpServer server = HttpServer.create(new InetSocketAddress(8900), 0);
         HttpContext context = server.createContext("/");
         context.setHandler(JPrint::handleGet);
-        System.out.println("Server starting hapilly at port 8900...");
+        System.out.println("Server starting very hapilly at port 8900...");
         server.start();
     }
 
