@@ -12,7 +12,6 @@ scrape_configs:
       password: "codehub"
     static_configs:
       - targets: ["jenkins2:8080"]
-
   - job_name: "node-exporter"
     static_configs:
       - targets: ["node-exporter:9100"]
