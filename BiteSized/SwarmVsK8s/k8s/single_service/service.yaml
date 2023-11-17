@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: single
+spec:
+  selector:
+    app: single
+  ports:
+  - name: http-single-svc
+    port: 8900
+    protocol: TCP
+    targetPort: http-single
+  type: LoadBalancer

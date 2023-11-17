@@ -1,0 +1,21 @@
+FROM fedora:39
+RUN dnf update -y
+RUN dnf install -y  \
+    sudo \
+    iproute \
+    procps \
+    git \
+    python3 \
+    wget \ 
+    openssh-server
+EXPOSE 80
+RUN mkdir /var/run/sshd
+RUN sed -i 's/^#\(ListenAddress\)/\1/g'  /etc/ssh/sshd_config
+RUN sed -i 's/^#\(HostKey .*ssh_host_.*_key\)/\1/g'  /etc/ssh/sshd_config
+RUN ssh-keygen -A -v
+RUN useradd -rm -d /home/andrew -s /bin/bash -g root -G wheel,root -u 2000 andrew
+RUN echo "andrew:passw0rd" | chpasswd
+RUN mkdir /home/andrew/.ssh
+COPY authorized_keys /home/andrew/.ssh/
+COPY nopass /etc/sudoers.d/
+CMD ["/usr/sbin/sshd", "-D", "-o", "ListenAddress=0.0.0.0"]

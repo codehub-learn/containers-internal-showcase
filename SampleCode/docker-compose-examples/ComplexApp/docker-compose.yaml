@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+
+  frontend:
+    build: frontend/.
+    volumes:
+      - logs:/var/log/
+
+  backend:
+    build: backend/.
+    volumes:
+      - ./logs:/var/log 
+
+volumes:
+  logs:
+

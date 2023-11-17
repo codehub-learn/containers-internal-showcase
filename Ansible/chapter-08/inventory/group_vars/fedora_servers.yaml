@@ -1,0 +1,8 @@
+folder_list:
+  - /var/run/db
+  - /opt/local/database
+  - /usr/local/html
+
+www_user: nginx
+#index_file: index_fedora.html
+index_file_dest: /usr/local/html

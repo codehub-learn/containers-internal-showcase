@@ -1,0 +1,15 @@
+---
+- name: Setup Apache in Debian
+  hosts: debian_servers
+  tasks:
+    - name: Install Apache
+      apt:
+        name: apache2
+        state: latest
+      become: true
+
+    - name: Start Apache
+      ansible.builtin.command:
+        cmd: apache2ctl start
+      become: true
+

@@ -1,0 +1,13 @@
+- hosts: all
+  roles:
+    - { role: setup }
+    - { role: print_message }
+
+- hosts: frontend_servers
+  roles:
+    - { role: nginx }
+
+- hosts: web_servers
+  roles:
+    - { role: apache2 }
+
