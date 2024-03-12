@@ -1,0 +1,34 @@
+---
+- name: Setup Apache in Debian
+  hosts: debian_servers
+  tasks:
+    - name: Install Apache
+      package:
+        name: apache2
+        state: latest
+      become: true
+
+    - name: Start Apache
+      ansible.builtin.command:
+        cmd: apache2ctl start
+      become: true
+
+- name: Setup Nginx in Fedora
+  hosts: fedora_servers
+  tasks:
+    - name: Install Nginx
+      package:
+        name: nginx
+        state: latest
+      become: true
+
+    - name: Check Nginx Status 
+      stat:
+        path: /run/nginx.pid
+      register: nginx_pid_status
+
+    - name: Start Nginx
+      ansible.builtin.command:
+        cmd: nginx
+      become: true
+      when: not nginx_pid_status.stat.exists

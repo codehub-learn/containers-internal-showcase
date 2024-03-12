@@ -1,0 +1,7 @@
+folder_list:
+  - /var/www/html
+  - /opt/local/data
+  - /usr/local/db
+www_user: apache2
+#index_file: index_debian.html
+index_file_dest: /var/www/html

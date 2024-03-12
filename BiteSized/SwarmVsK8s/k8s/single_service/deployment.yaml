@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: single
+  name: single
+spec:
+  replicas: 10
+  revisionHistoryLimit: 100
+  selector:
+    matchLabels:
+      app: single
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: single
+    spec:
+      containers:
+      - image: nginx:1.14.2
+        name: indian
+        ports: 
+          - containerPort: 80
+            name: http-single
+

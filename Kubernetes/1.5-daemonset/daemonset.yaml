@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: pyset
+  labels:
+    developer-name: kostas
+spec:
+  revisionHistoryLimit: 4
+  selector:
+    matchLabels:
+      app: pyapp
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1 
+  template:
+    metadata:
+      labels:
+        app: pyapp
+    spec:
+      containers:
+      - name: pyapp
+        image: brokenleg/pyapp:1.3
+        ports:
+        - containerPort: 8000

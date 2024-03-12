@@ -1,0 +1,35 @@
+- name: Build Debian Image
+  community.docker.docker_image:
+    build:
+      path: "{{ role_path }}/files"
+      dockerfile: Dockerfile_debian
+    name: debian-base
+    source: build
+
+- name: Build Fedora Image
+  community.docker.docker_image:
+    build:
+      path: "{{ role_path }}/files"
+      dockerfile: Dockerfile_fedora
+    name: fedora-base
+    source: build
+
+- name: Create Debian containers
+  docker_container:
+    name: "debian-0{{ item }}"
+    image: debian-base:latest
+    state: started
+    ports:
+      - "10{{ item }}80:80"
+      - "10{{ item }}22:22"
+  with_sequence: start=1 end=3
+
+- name: Create Fedora containers
+  docker_container:
+    name: "fedora-0{{ item }}"
+    image: fedora-base:latest
+    state: started
+    ports:
+      - "20{{ item }}80:80"
+      - "20{{ item }}22:22"
+  with_sequence: start=1 end=3

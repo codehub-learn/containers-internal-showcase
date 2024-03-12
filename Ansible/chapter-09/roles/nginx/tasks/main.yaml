@@ -1,0 +1,46 @@
+  - name: Install Nginx
+    package:
+      name: nginx
+      state: latest
+    become: true
+
+  - name: Check Nginx Status in Fedora
+    stat:
+      path: /run/nginx.pid
+    register: nginx_pid_status
+
+  - name: Start Nginx
+    ansible.builtin.command:
+      cmd: nginx
+    become: true
+    when: not nginx_pid_status.stat.exists
+
+  - name: Copy index.html
+    copy:
+      src: "{{ index_file }}"
+      dest: "{{ index_file_dest }}/index.html"
+      owner: "{{ www_user }}"
+      group: "{{ www_user }}"
+    become: true
+    tags: update
+
+  - name: Template index.html
+    template:
+      src: "{{ index_file }}.j2"
+      dest: "{{ index_file_dest }}/index.html"
+      owner: "{{ www_user }}"
+      group: "{{ www_user }}"
+    become: true
+    tags: update
+
+  - name: Copy config_file
+    copy:
+      src: nginx.conf
+      dest: /etc/nginx
+      owner: root
+      group: root
+      mode: 0600
+    tags: update
+    become: true
+    notify: nginx reload
+
