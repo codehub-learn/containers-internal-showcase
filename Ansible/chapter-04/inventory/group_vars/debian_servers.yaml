@@ -1,9 +1,0 @@
-folder_list:
-  - /var/www/html
-  - /opt/local/data
-  - /usr/local/db
-
-www_user: maddeb
-www_users:
-  - maddeb
-  - madcow

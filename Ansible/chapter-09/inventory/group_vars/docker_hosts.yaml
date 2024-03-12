@@ -1,7 +1,0 @@
-dockers:
-  debian:
-    filename: Dockerfile_debian
-    imagename: debian
-  fedora:
-    filename: Dockerfile_fedora
-    imagename: fedora 
