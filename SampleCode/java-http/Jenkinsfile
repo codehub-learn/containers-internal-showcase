@@ -19,7 +19,7 @@ pipeline {
     stages {
         stage ('Checkout'){
             steps {
-                git branch: "main",
+                git branch: "jenkins",
                 credentialsId: "github",
                 url: "https://github.com/codehub-learn/containers-internal-showcase.git"
                 }
