@@ -1,5 +1,0 @@
----
-- name: Prepare dockers 
-  hosts: docker_hosts
-  roles:
-    - dockers
