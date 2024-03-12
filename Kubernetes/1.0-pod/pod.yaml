@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: Pod
-metadata:
-  name: pypod
-spec:
-  containers:
-    - name: pyapp
-      image: brokenleg/pyapp:1.1

@@ -1,3 +1,0 @@
-- name: nginx reload
-  command: nginx -s reload
-  become: true  
