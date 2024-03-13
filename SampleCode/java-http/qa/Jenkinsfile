@@ -39,7 +39,7 @@ pipeline {
             steps{
                 script {
                     docker.withRegistry( '', dockercredentials ) {
-                        docker.image("${imagename}:${params.RELEASE_TAG}").push("${params.RELEASE_TAG}")
+                        docker.image("${imagename}:${params.IMAGE_TAG}").push("${params.RELEASE_TAG}")
                     }
                 }
             }
