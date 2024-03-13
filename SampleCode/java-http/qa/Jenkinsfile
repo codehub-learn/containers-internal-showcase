@@ -11,7 +11,7 @@ pipeline {
         timestamps()
     }
     environment {
-        imagename = "brokenleg/jprint:${params.IMAGE_TAG}"
+        imagename = "brokenleg/jprint"
         dockercredentials = 'dockerhub'
         dockerImage = ''
     }
@@ -24,7 +24,7 @@ pipeline {
         stage('Deploy Image in container') {
             steps{
                     script{
-                        docker.image(imagename).run('-d -p 8900:8900 --name jprint --network jenkins')
+                        docker.image("${imagename}:${params.IMAGE_TAG}").run('-d -p 8900:8900 --name jprint --network jenkins')
                     }
                 }
             }
