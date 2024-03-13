@@ -10,8 +10,12 @@ pipeline {
     options {
         timestamps()
     }
+    parameters {
+        string(name: 'IMAGE_TAG', defaultValue: 'latest', description: 'Docker image tag') 
+    }
+ 
     environment {
-        imagename = "brokenleg/jprint"
+        imagename = "brokenleg/jprint:${params.IMAGE_TAG}"
         dockercredentials = 'dockerhub'
         dockerImage = ''
     }
