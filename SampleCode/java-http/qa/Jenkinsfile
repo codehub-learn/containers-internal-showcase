@@ -19,7 +19,6 @@ pipeline {
         string(name: 'IMAGE_TAG', defaultValue: 'latest', description: 'Docker image tag') 
     }
  
-
     stages {
         stage('Deploy Image in container') {
             steps{
@@ -39,8 +38,7 @@ pipeline {
             steps{
                 script {
                     docker.withRegistry( '', dockercredentials ) {
-                        dockerImage.push('STABLE')
-                        dockerImage.push("RELEASE-$BUILD_NUMBER")
+                        docker.image("${imagename}:${params.IMAGE_TAG}").push('STABLE')
                     }
                 }
             }
