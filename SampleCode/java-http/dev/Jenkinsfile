@@ -86,7 +86,9 @@ pipeline {
             mail to: "kmakedos@athtech.gr",
             subject: "Build Failed: $BUILD_TAG",
             body: "Link to JOB $BUILD_URL"
-
+        }
+        success {
+            build job: "qa-tests"
         }
         always{
             junit "**/target/surefire-reports/*.xml"
