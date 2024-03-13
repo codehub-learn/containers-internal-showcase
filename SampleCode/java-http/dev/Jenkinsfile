@@ -4,6 +4,9 @@ pipeline {
     agent {
         label 'docker'
     }
+    parameters {
+        string(name: 'IMAGE_TAG', defaultValue: 'latest', description: 'Docker image tag') 
+    }
     tools {
         maven 'mvn'
     }
@@ -13,7 +16,8 @@ pipeline {
     environment {
         imagename = "brokenleg/jprint"
         dockercredentials = 'dockerhub'
-        dockerImage = ''
+        dockerImage = "${IMAGE_TAG}"
+
     }
 
     stages {
