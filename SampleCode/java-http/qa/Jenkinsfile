@@ -16,7 +16,8 @@ pipeline {
         dockerImage = ''
     }
     parameters {
-        string(name: 'IMAGE_TAG', defaultValue: 'latest', description: 'Docker image tag') 
+        string(name: 'IMAGE_TAG', defaultValue: 'dev', description: 'Docker image tag') 
+        string(name: 'RELEASE_TAG', defaultValue: 'release', description: 'Docker image tag') 
     }
  
     stages {
@@ -38,7 +39,7 @@ pipeline {
             steps{
                 script {
                     docker.withRegistry( '', dockercredentials ) {
-                        docker.image("${imagename}:${params.IMAGE_TAG}").push('STABLE')
+                        docker.image("${imagename}:${params.RELEASE_TAG}").push("${params.RELEASE_TAG}")
                     }
                 }
             }

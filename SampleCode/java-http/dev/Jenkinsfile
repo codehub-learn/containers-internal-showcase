@@ -5,7 +5,7 @@ pipeline {
         label 'docker'
     }
     parameters {
-        string(name: 'IMAGE_TAG', defaultValue: 'latest', description: 'Docker image tag') 
+        string(name: 'IMAGE_TAG', defaultValue: 'dev', description: 'Docker image tag') 
     }
     tools {
         maven 'mvn'
