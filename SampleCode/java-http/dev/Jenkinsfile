@@ -16,7 +16,7 @@ pipeline {
     environment {
         imagename = "brokenleg/jprint"
         dockercredentials = 'dockerhub'
-        dockerImage = "${IMAGE_TAG}"
+        dockerImage = "${params.IMAGE_TAG}"
 
     }
 
