@@ -1,0 +1,47 @@
+def PATH_TO_POM="SampleCode/java-http"
+
+pipeline { 
+    agent {
+        label 'docker'
+    }
+    tools {
+        maven 'mvn'
+    }
+    options {
+        timestamps()
+    }
+    environment {
+        imagename = "brokenleg/jprint"
+        dockercredentials = 'dockerhub'
+        dockerImage = ''
+    }
+
+    stages {
+        stage('Deploy Image in container') {
+            steps{
+                    script{
+                        docker.image(imagename).run('-d -p 8900:8900 --name jprint --network jenkins')
+                    }
+                }
+            }
+        }
+        
+    post {
+        failure {
+            mail to: "kmakedos@athtech.gr",
+            subject: "Build Failed: $BUILD_TAG",
+            body: "Link to JOB $BUILD_URL"
+
+        }
+        always{
+            script {
+                try{
+                    sh "docker container stop jprint"
+                    sh "docker container rm jprint"
+                }catch (err) {
+                    echo "Deleting container failed..."
+                }
+            }
+        }
+    }
+}
