@@ -88,10 +88,8 @@ pipeline {
             body: "Link to JOB $BUILD_URL"
         }
         success {
-            build job: 'qa-tests', parameters: [
-                [$class: 'StringParameterValue', name: 'IMAGE_TAG', value: "${params.IMAGE_TAG}"]
-                [$class: 'StringParameterValue', name: 'RELEASE_TAG', value: "${params.IMAGE_TAG}-release"]
-                ]
+            build job: 'qa-tests', parameters: [string(name: 'IMAGE_TAG', value: "${params.IMAGE_TAG}")]
+                
         }
         always{
             junit "**/target/surefire-reports/*.xml"
