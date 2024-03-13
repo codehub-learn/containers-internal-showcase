@@ -1,4 +1,4 @@
-JENKINS_NAME?=jenkins2
+JENKINS_NAME?=jenkins
 .ONESHELL:
 
 run: clean-jenkins volume-jenkins network
@@ -6,7 +6,6 @@ run: clean-jenkins volume-jenkins network
 		-d \
 		-p 8080:8080 \
 		-v $(JENKINS_NAME)-vol:/var/jenkins_home \
-		-v /var/run/docker.sock:/var/run/docker.sock  \
 		--network jenkins  \
 		--name $(JENKINS_NAME) \
 		jenkins/jenkins:lts-jdk11
