@@ -89,6 +89,7 @@ pipeline {
         }
         success {
             build job: 'qa-tests', parameters: [string(name: 'IMAGE_TAG', value: "${params.IMAGE_TAG}")]
+            build job: 'qa-tests', parameters: [string(name: 'RELEASE_TAG', value: "${params.IMAGE_TAG}-release")]
                 
         }
         always{
