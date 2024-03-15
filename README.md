@@ -3,14 +3,17 @@ This repository is a demo of a CI pipeline with testing
 
 ### Start Jenkins
 `cd Jenkins`
+
 `make run`
 
 ### Start Jenkins-agent
 `cd Jenkins`
+
 `make run-agent`
 
 ### Change /var/run/docker in agent
 `docker exec -it jenkins-agent bash`
+
 `chmod 666 /var/run/docker.sock`
 
 Press Ctrl-D to exit
