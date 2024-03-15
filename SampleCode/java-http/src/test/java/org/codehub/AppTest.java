@@ -3,6 +3,7 @@ package org.codehub;
 import static org.junit.Assert.assertTrue;
 import org.codehub.JPrint;
 import com.sun.net.httpserver.*;
+import java.net.*;
 import org.junit.Test;
 
 /**
