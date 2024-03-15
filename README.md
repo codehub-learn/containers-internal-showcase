@@ -74,11 +74,11 @@ password: passw0rd
 - Press Save
 
 ### Create your first job
-- Create a new Pipeline Jon
+- Create a new Pipeline Job
 - Select Pipeline Script from SCM
 - Put this repository as Repository URL
 - Select github credentials
 
 ### Run the Pipeline
-Well, if you made it congrats. You can run the pipeline now.
+Well, if you made it so far, congrats! You can run the pipeline now :)
 
