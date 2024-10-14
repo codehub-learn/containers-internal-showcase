@@ -73,9 +73,11 @@ pipeline {
                     sh "echo Running integration tests "
             }
         }
+
         stage('Release image to registry') {
             steps{
                     sh "echo Releasing image"
+                    sh "echo $GIT_TAG"
                 }
             }
         }
