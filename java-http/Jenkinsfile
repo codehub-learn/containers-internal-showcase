@@ -54,9 +54,7 @@ pipeline {
          stage ('Create docker Image') {
             steps {
                 dir("java-http/"){
-                    script{
-                        dockerImage = docker.build imagename
-                    }
+                        sh "echo creating docker image $imagename"
                 }
             }
         }
