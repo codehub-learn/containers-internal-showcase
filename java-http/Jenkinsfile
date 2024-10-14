@@ -66,10 +66,9 @@ pipeline {
             junit "**/target/surefire-reports/*.xml"
             script {
                 try{
-                    sh "docker container stop jprint"
-                    sh "docker container rm jprint"
+                    echo "Cleaning up"
                 }catch (err) {
-                    echo "Deleting container failed..."
+                    echo "Error cleaning up..."
                 }
             }
         }
