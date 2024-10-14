@@ -57,6 +57,7 @@ pipeline {
                     sh "echo creating docker image $imagename"
                 }
             }
+         }
         stage('Publish image to registry') {
             steps{
                     sh "echo Publishing docker image to registry"
@@ -79,7 +80,6 @@ pipeline {
             }
         }
  
-    }
         
     post {
         failure {
