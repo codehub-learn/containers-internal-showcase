@@ -73,11 +73,10 @@ pipeline {
                     sh "echo Running integration tests "
             }
         }
-
+        when { tag "release-*" }`
         stage('Release image to registry') {
             steps{
                     sh "echo Releasing image"
-                    sh "echo $GIT_TAG"
                 }
             }
         }
