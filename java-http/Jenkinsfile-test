@@ -53,50 +53,6 @@ pipeline {
                 }               
             }
         }
-         stage ('Create docker Image') {
-            steps {
-                dir("SampleCode/JPrint/"){
-                    script{
-                        dockerImage = docker.build imagename
-                    }
-                }
-            }
-        }
-        stage('Publish image to registry') {
-            steps{
-                script {
-                    docker.withRegistry( '', dockercredentials ) {
-                        dockerImage.push("$BUILD_NUMBER")
-                        dockerImage.push('latest')
-                    }
-                }
-            }
-        }
-        stage('Deploy Image in container') {
-            steps{
-                    script{
-                        docker.image(imagename).run('-d -p 8900:8900 --name jprint --network jenkins')
-                    }
-                }
-            }
-        stage('Run Integrations tests') {
-            steps{
-                script{
-                    sh "curl -v http://jprint:8900 "
-                }
-            }
-        }
-        stage('Release image to registry') {
-            steps{
-                script {
-                    docker.withRegistry( '', dockercredentials ) {
-                        dockerImage.push('STABLE')
-                        dockerImage.push("RELEASE-$BUILD_NUMBER")
-                    }
-                }
-            }
-        }
- 
     }
         
     post {
@@ -110,8 +66,6 @@ pipeline {
             junit "**/target/surefire-reports/*.xml"
             script {
                 try{
-                    sh "docker container stop jprint"
-                    sh "docker container rm jprint"
                 }catch (err) {
                     echo "Deleting container failed..."
                 }
