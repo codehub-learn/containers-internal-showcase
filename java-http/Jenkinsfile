@@ -63,7 +63,6 @@ pipeline {
                     sh "echo Publishing docker image to registry"
                 }
             }
-        }
         stage('Deploy Image in container') {
             steps{
                     sh "echo Deploy to testing env"
