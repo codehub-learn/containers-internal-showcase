@@ -53,43 +53,6 @@ pipeline {
                 }               
             }
         }
-         stage ('Create docker Image') {
-            steps {
-                dir("java-http/"){
-                        sh "echo Creating Docker Image"
-                    }
-                }
-            }
-        }
-        stage('Publish image to registry') {
-            steps{
-                    sh "echo Publishing to registry"
-                }
-            }
-        }
-        stage('Deploy Image in container') {
-            steps{
-                    echo "Deploying image"
-                }
-            }
-        stage('Run Integrations tests') {
-            steps{
-                script{
-                    sh "curl -v http://jprint:8900 "
-                }
-            }
-        }
-        stage('Release image to registry') {
-            steps{
-                script {
-                    docker.withRegistry( '', dockercredentials ) {
-                        dockerImage.push('STABLE')
-                        dockerImage.push("RELEASE-$BUILD_NUMBER")
-                    }
-                }
-            }
-        }
- 
     }
         
     post {
@@ -103,10 +66,9 @@ pipeline {
             junit "**/target/surefire-reports/*.xml"
             script {
                 try{
-                    sh "docker container stop jprint"
-                    sh "docker container rm jprint"
+                    echo "Cleaning up"
                 }catch (err) {
-                    echo "Deleting container failed..."
+                    echo "Error cleaning up..."
                 }
             }
         }
