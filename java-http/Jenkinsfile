@@ -22,14 +22,14 @@ pipeline {
         }
         stage('Build') { 
             steps { 
-                dir("SampleCode/JPrint/"){
+                dir("java-http/"){
                     sh 'mvn clean compile'
                 }
             }
         }
         stage('Unit Testing') { 
             steps { 
-                dir("SampleCode/JPrint/"){
+                dir("java-http/"){
                     sh 'mvn clean test'
                 }
             }
@@ -41,7 +41,7 @@ pipeline {
         }
         stage('Package') { 
             steps { 
-                dir("SampleCode/JPrint/"){
+                dir("java-http/"){
                     sh 'mvn package -Dmaven.test.skip=true'
                 }
             }
@@ -53,7 +53,7 @@ pipeline {
         }
          stage ('Create docker Image') {
             steps {
-                dir("SampleCode/JPrint/"){
+                dir("java-http/"){
                     script{
                         dockerImage = docker.build imagename
                     }
