@@ -16,7 +16,7 @@ class JPrint {
     }
 
     private static void handleGet(HttpExchange exchange) throws IOException {
-        String response = "Hello from Pfizer again for eternity";
+        String response = "Hello from Pfizer again from kostas for eternity";
         exchange.sendResponseHeaders(200, response.getBytes().length);
         OutputStream os = exchange.getResponseBody();
         os.write(response.getBytes());
