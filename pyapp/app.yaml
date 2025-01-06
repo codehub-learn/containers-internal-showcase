@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pyapp
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/codehub-learn/containers-internal-showcase.git
+    targetRevision: argo
+    path: myapp
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: myappns
