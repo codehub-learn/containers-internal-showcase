@@ -1,6 +1,7 @@
 apiVersion: v1
 data:
   username: kostas
+  id: "121111"
 kind: ConfigMap
 metadata:
   name: sample
